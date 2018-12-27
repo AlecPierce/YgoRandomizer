@@ -1,5 +1,5 @@
 # YgoRandomizer
-<p>YgoRandomizer cannot randomize, for now... In the future I hope to have the functionality of being able to choose criteria from a UI and have random decks generated based on those criteria.</p>
+<p>YgoRandomizer creates two random decks based on the criteria selected in the user interface.</p>
 <p>Files associated with YgoRandomizer.java:
   <ul>
 <li>YgoParser</li>
