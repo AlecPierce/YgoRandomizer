@@ -7,6 +7,12 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Alec Pierce
+ *	<p>
+ *	Created: 12/21/2018
+ *	</p>
+ */
 public class YgoYearParser {
 	public Map<String, List<String>> filterByYear (Map<String, String> yearRange, Map<String, List<String>> sets) {
 		Map<String, List<String>> setsToUse = new LinkedHashMap<String, List<String>>();
