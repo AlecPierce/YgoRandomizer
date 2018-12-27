@@ -64,7 +64,6 @@ public class YgoParser {
 	
 	public Elements getElements(String element) {
 		Document docToParse = getDocument();
-		System.out.println("Finding " + element);
 		Elements elements = docToParse.select(element);
 		return elements;
 	}

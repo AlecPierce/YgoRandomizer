@@ -71,7 +71,7 @@ public class YgoCardParser extends YgoParser {
 	
 	/**
 	 * Creates set objects and stores the associated cards in the set. 
-	 * Those setList will then be added to a map.
+	 * Those cardsFromSet will then be added to a map.
 	 * <p>
 	 * Map: Key = Set's name (String), Value = Set object (Set)
 	 * </p>
