@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -74,26 +75,21 @@ public class YgoRandomizer extends JFrame implements ItemListener {
 
         mainPanel.add(checkBoxPanel);
 
-		// array of string containing cities 
-		String s1[] = {"Default",
-	             "2002",
-	             "2003",
-	             "2004",
-	             "2005",
-	             "2006",
-	             "2007",
-	             "2008",
-	             "2009",
-	             "2010",
-	             "2011",
-	             "2012",
-	             "2013",
-	             "2014",
-	             "2015",
-	             "2016",
-	             "2017",
-	             "2018",
-	             "2019" }; 
+		// array of string containing years
+        int startYear = 2002;
+        String year = "";
+        ArrayList<String> yearOptions = new ArrayList<String>();
+        yearOptions.add("Default");
+        Date date = new Date();
+        int currentYear = date.getYear() + 1900;
+        for (int i = startYear; i <= currentYear; i++) {
+			year = String.valueOf(i);
+			yearOptions.add(year);
+		}
+        String s1[] = new String[yearOptions.size()];              
+		for(int j = 0; j < yearOptions.size(); j++){
+		  s1[j] = yearOptions.get(j);
+		}
 
 		// create checkbox 
 		c1 = new JComboBox(s1); 
@@ -204,7 +200,10 @@ public class YgoRandomizer extends JFrame implements ItemListener {
 			
 			// For deck 1
 			Random rand = new Random();
-			long seed = System.nanoTime();
+			long seed = rand.nextLong();
+			if (seed < 0) {
+				seed = seed * -1;
+			}
 			while (seed > cardList.size()) {
 				seed = (seed/2);
 			}
@@ -212,13 +211,16 @@ public class YgoRandomizer extends JFrame implements ItemListener {
 			
 			// For deck 2
 			Random rand2 = new Random();
-			long seed2 = System.nanoTime();
+			long seed2 = rand2.nextLong();
+			if (seed2 < 0) {
+				seed2 = seed2 * -1;
+			}
 			while (seed2 > cardList.size()) {
 				seed2 = (seed2/2);
 			}
 			rand2.setSeed(seed2);
 			
-			createRandomDecks(cardList, deck, deck2, rand, seed, seed2);
+			createRandomDecks(cardList, deck, deck2, rand, rand2, seed, seed2);
 			deck.close();
 			deck2.close();
 		} catch (FileNotFoundException fileNotFoundException) {
@@ -237,7 +239,7 @@ public class YgoRandomizer extends JFrame implements ItemListener {
 	 * @param seed
 	 * @param seed2
 	 */
-	private static void createRandomDecks(List<String> cardList, PrintWriter deck, PrintWriter deck2, Random rand,
+	private static void createRandomDecks(List<String> cardList, PrintWriter deck, PrintWriter deck2, Random rand, Random rand2,
 			long seed, long seed2) {
 		// Creates random deck 1 and 2
 		int deckCounter = 0;
@@ -247,7 +249,7 @@ public class YgoRandomizer extends JFrame implements ItemListener {
 			String card = cardList.get(index);
 			deck.write(card);
 			deck.println(); // after adding the card to the deck, terminate the current line
-			index = rand.nextInt((int) seed2);
+			index = rand2.nextInt((int) seed2);
 			card = cardList.get(index);
 			deck2.write(card);
 			deck2.println();
